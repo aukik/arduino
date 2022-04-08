@@ -20,7 +20,7 @@ String light="red";
 void setup() {
   //Initialize Serial communications
   Serial.begin(9600);
-  
+
   //Report the LED type and pins in use to the serial port...
   Serial.println("Welcome to the RGBLED Sample Sketch");
   String ledType = (rgbLed.commonType==0) ? "COMMON_CATHODE" : "COMMON_ANODE";
@@ -32,7 +32,7 @@ void setup() {
 
 void loop() {
 
-  //The code in the loop shows multiple exampls
+  //The code in the loop shows multiple exam
 
   //Set the RGBLED to show RED only
   //printRgbValues() prints various LED values to the Serial port
@@ -75,14 +75,14 @@ void loop() {
 //  rgbLed.writeRandom();
 //  printRgbValues();
 //  delay(delayMs);
-//  
+//
 //  //Set the pins individually if needed
 //  rgbLed.writeRed(255);
 //  rgbLed.writeGreen(255);
 //  rgbLed.writeBlue(255);
 //  printRgbValues();
 //  delay(delayMs);
-//  
+//
 //  //The above code does the same thing as...
 //  rgbLed.writeRGB(255,255,255);
 //  printRgbValues();
@@ -99,48 +99,48 @@ void loop() {
 //  printRgbValues();
 //  delay(delayMs);
 //
-  
+
   int color_code=255;
-  
+
  if(light=="red"){
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(255,color_code,255);
           color_code--;
-          delay(10);  
+          delay(10);
         }
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(255,color_code,255);
           color_code++;
-          delay(10);  
+          delay(10);
         }
       light="green";
       } else if(light=="green"){
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(255,255,color_code);
-          color_code--;  
+          color_code--;
           delay(10);
         }
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(255,255,color_code);
-          color_code++;  
+          color_code++;
           delay(10);
         }
       light="blue";
       }else{
         for(int i=0;i<255;i++){
           rgbLed.writeRGB(color_code,255,255);
-          color_code--;  
+          color_code--;
           delay(10);
         }
         for(int i=0;i<255;i++){
           rgbLed.writeRGB(color_code,255,255);
-          color_code++;  
+          color_code++;
           delay(10);
         }
       light="red";
-        
+
         }
-   
+
 
 }
 
@@ -175,7 +175,7 @@ String light="red";
 void setup() {
   //Initialize Serial communications
   Serial.begin(9600);
-  
+
   //Report the LED type and pins in use to the serial port...
   Serial.println("Welcome to the RGBLED Sample Sketch");
   String ledType = (rgbLed.commonType==0) ? "COMMON_CATHODE" : "COMMON_ANODE";
@@ -230,14 +230,14 @@ void loop() {
 //  rgbLed.writeRandom();
 //  printRgbValues();
 //  delay(delayMs);
-//  
+//
 //  //Set the pins individually if needed
 //  rgbLed.writeRed(255);
 //  rgbLed.writeGreen(255);
 //  rgbLed.writeBlue(255);
 //  printRgbValues();
 //  delay(delayMs);
-//  
+//
 //  //The above code does the same thing as...
 //  rgbLed.writeRGB(255,255,255);
 //  printRgbValues();
@@ -254,48 +254,48 @@ void loop() {
 //  printRgbValues();
 //  delay(delayMs);
 //
-  
+
   int color_code=255;
-  
+
  if(light=="red"){
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(255,color_code,255);
           color_code--;
-          delay(10);  
+          delay(10);
         }
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(255,color_code,255);
           color_code++;
-          delay(10);  
+          delay(10);
         }
       light="green";
       } else if(light=="green"){
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(255,255,color_code);
-          color_code--;  
+          color_code--;
           delay(10);
         }
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(255,255,color_code);
-          color_code++;  
+          color_code++;
           delay(10);
         }
       light="blue";
       }else{
         for(int i=0;i<255;i++){
           rgbLed.writeRGB(color_code,255,255);
-          color_code--;  
+          color_code--;
           delay(10);
         }
         for(int i=0;i<255;i++){
           rgbLed.writeRGB(color_code,255,255);
-          color_code++;  
+          color_code++;
           delay(10);
         }
       light="red";
-        
+
         }
-   
+
 
 }
 
