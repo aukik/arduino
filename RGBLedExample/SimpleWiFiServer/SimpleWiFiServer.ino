@@ -149,7 +149,9 @@ void loop(){
           
           delay(delayMs);           
         }
-        if(b_random){
+                
+      }
+      if(b_random){
           rgbLed.writeRandom();
           delay(delayMs);
           }
@@ -199,14 +201,12 @@ void loop(){
         
         }  
             
-            }        
-      }
-      
+            }
     }
     // close the connection:
     
     
-    client.stop();
+//    client.stop();
     
     
   }
