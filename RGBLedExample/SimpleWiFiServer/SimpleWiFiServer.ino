@@ -9,6 +9,9 @@ WiFiServer server(80);
 RGBLED rgbLed(2,4,23,COMMON_CATHODE);
 int delayMs = 1000;
 String light="red";
+bool b_random=false;
+  bool b_cycle=false;
+  bool b_wheel=false;
 void setup()
 {
     Serial.begin(115200);
@@ -39,13 +42,12 @@ void setup()
 }
 
 int value = 0;
+bool cycle=false;
 
 void loop(){
  WiFiClient client = server.available();   // listen for incoming clients
   String currentLine = "";
-  bool b_random=false;
-  bool b_cycle=false;
-  bool b_wheel=false;
+  
   if (client) {                             // if you get a client,
     Serial.println("New Client.");           // print a message out the serial port
                     // make a String to hold incoming data from the client
@@ -101,6 +103,10 @@ void loop(){
         }
         // Check to see if the client request was "GET /H" or "GET /L":
         if (currentLine.endsWith("GET /Hred")) {
+          
+          b_cycle=false ;
+         b_wheel=false;
+         b_random=false;
           rgbLed.writeRed(255);
                // GET /H turns the LED on
         }
@@ -109,12 +115,20 @@ void loop(){
           rgbLed.writeRed(0);                // GET /L turns the LED off
         }
         if (currentLine.endsWith("GET /Hgreen")) {
+          
+          b_cycle=false ;
+         b_wheel=false;
+         b_random=false;
           rgbLed.writeGreen(255);              // GET /H turns the LED on
         }
         if (currentLine.endsWith("GET /Lgreen")) {
           rgbLed.writeGreen(0);               // GET /H turns the LED on
         }
         if (currentLine.endsWith("GET /Hblue")) {
+         
+          b_cycle=false ;
+         b_wheel=false;
+         b_random=false;
           rgbLed.writeBlue(255);               // GET /H turns the LED on
         }
         if (currentLine.endsWith("GET /Lblue")) {
@@ -125,6 +139,7 @@ void loop(){
         
         
         if (currentLine.endsWith("GET /cycle")) {
+         cycle=true;
          b_cycle=true ;
          b_wheel=false;
          b_random=false;       
@@ -146,21 +161,37 @@ void loop(){
         }
         if (currentLine.endsWith("GET /off")) {
           rgbLed.turnOff();
-          
+          b_cycle=false ;
+         b_wheel=false;
+         b_random=false; 
+         cycle=true;
           delay(delayMs);           
         }
                 
       }
-      if(b_random){
+      
+    }
+    // close the connection:
+    
+    
+    client.stop();
+    
+    
+  }
+  if(b_random){
           rgbLed.writeRandom();
           delay(delayMs);
           }
-
-         if(b_wheel){
-          rgbLed.writeColorWheel(50);
-          }
-          if(b_cycle){
-                      int color_code=0;
+         
+  if(b_wheel){
+    rgbLed.writeColorWheel(50);
+       }
+  if(b_cycle){
+    if(cycle){
+      rgbLed.turnOff();
+          cycle=false;
+      }
+ int color_code=0;
   
  if(light=="red"){
       for(int i=0;i<255;i++){
@@ -202,14 +233,6 @@ void loop(){
         }  
             
             }
-    }
-    // close the connection:
-    
-    
-//    client.stop();
-    
-    
-  }
   
 }
 
