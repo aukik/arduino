@@ -103,8 +103,10 @@ void loop(){
         }
         // Check to see if the client request was "GET /H" or "GET /L":
         if (currentLine.endsWith("GET /Hred")) {
-          
-          b_cycle=false ;
+         if(b_cycle==true || b_wheel==true || b_random==true){
+            rgbLed.turnOff();
+          } 
+         b_cycle=false ;
          b_wheel=false;
          b_random=false;
           rgbLed.writeRed(255);
@@ -115,6 +117,9 @@ void loop(){
           rgbLed.writeRed(0);                // GET /L turns the LED off
         }
         if (currentLine.endsWith("GET /Hgreen")) {
+          if(b_cycle==true || b_wheel==true || b_random==true){
+            rgbLed.turnOff();
+          } 
           
           b_cycle=false ;
          b_wheel=false;
@@ -125,6 +130,9 @@ void loop(){
           rgbLed.writeGreen(0);               // GET /H turns the LED on
         }
         if (currentLine.endsWith("GET /Hblue")) {
+          if(b_cycle==true || b_wheel==true || b_random==true){
+            rgbLed.turnOff();
+          } 
          
           b_cycle=false ;
          b_wheel=false;
