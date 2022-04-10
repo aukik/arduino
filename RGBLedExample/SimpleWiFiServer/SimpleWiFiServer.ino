@@ -212,7 +212,7 @@ void loop(){
           delay(5);
         }
         wheel_number++;
-    }//ggggg
+    }
     else if(wheel_number==2){
       //gd
       for(int i=255;i>=0;i--){
