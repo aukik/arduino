@@ -199,7 +199,7 @@ void loop(){
        for(int i=255;i>=0;i--){
           rgbLed.writeRGB(i,255,0);
 
-          
+
           delay(5);
         }
     wheel_number++;
@@ -208,17 +208,17 @@ void loop(){
       for(int i=0;i<=255;i++){
           rgbLed.writeRGB(0,255,i);
 
-          
+
           delay(5);
         }
         wheel_number++;
-    }
+    }//ggggg
     else if(wheel_number==2){
       //gd
       for(int i=255;i>=0;i--){
           rgbLed.writeRGB(0,i,255);
 
-          
+
           delay(5);
         }
         wheel_number++;
@@ -227,18 +227,18 @@ void loop(){
       for(int i=0;i<=255;i++){
           rgbLed.writeRGB(i,0,255);
 
-          
+
           delay(5);
         }
     wheel_number++;
     }
-    
+
     else if(wheel_number==4){
       //bd
       for(int i=255;i>=0;i--){
           rgbLed.writeRGB(255,0,i);
 
-         
+
           delay(5);
         }
 wheel_number++;
@@ -250,7 +250,7 @@ wheel_number++;
           wheel_number=0;
           delay(5);
         }
-        
+
     }
   }
   if(b_cycle){
