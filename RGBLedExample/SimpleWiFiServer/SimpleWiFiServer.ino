@@ -12,6 +12,9 @@ String light="red";
 bool b_random=false;
   bool b_cycle=false;
   bool b_wheel=false;
+  int red=0;
+  int green=0;
+  int blue=0;
 void setup()
 {
     Serial.begin(115200);
@@ -81,8 +84,12 @@ client.println("    <div class='container-fluid'>");
 client.println("      <a class='navbar-brand' href='#'>GG</a>");
 client.println("    </div>");
 client.println("  </nav>");
-client.println("  <div class='container-fluid' align='center' style='padding-top:5px;'>");
-
+client.println("  <div class='container-fluid' align='center' style='padding-top:5px;'> <div class='d-flex justify-content-center' style='padding-bottom: 5px;'><a href='reset_rgb'><button class='btn btn-danger'>Reset RGB</button></a></div>");
+String redString = String(red);
+String greenString = String(green);
+String blueString = String(blue);
+client.println("<div class='d-flex justify-content-center' style='align-items: center;'><div style='padding-bottom: 5px;padding-right: 5px;'> <a href='r'><button class='btn btn-danger'>R</button></a></div> <div style='padding-bottom: 5px;padding-right: 5px;'><a href='g'><button class='btn btn-success' style='background-color: #2a990e;'>G</button></a></div><div style='padding-bottom: 5px;padding-right: 5px;'> <a href='b'><button class='btn btn-primary'>B</button></a></div></div>");
+client.println(" <div class='d-flex justify-content-center' style='align-items: center; display: inline-flex; flex-wrap: wrap; gap: 12px;'><div class='shadow-none p-2 mb-2 bg-light rounded' style='padding-right:5px;'>"+redString+"</div><div class='shadow-none p-2 mb-2 bg-light rounded' style='padding-right:5px;'>"+greenString+"</div><div class='shadow-none p-2 mb-2 bg-light rounded' style='padding-right: 5px;'>"+blueString+"</div></div>");
 client.println("    <div style='padding-bottom: 5px;'>");
 client.println("      <a href='Hred'><button class='btn btn-danger'>Red ON</button></a> <br>");
 client.println("    </div>");
@@ -170,6 +177,54 @@ client.println("</html>");
         }
         if (currentLine.endsWith("GET /Lblue")) {
           rgbLed.writeBlue(0);             // GET /H turns the LED on
+        }
+        if (currentLine.endsWith("GET /reset_rgb")) {
+         rgbLed.turnOff();
+         red=0;
+         blue=0;
+         green=0;
+        }
+        if (currentLine.endsWith("GET /r")) {
+          if(red<=255 and red>=0){
+            if(b_cycle==true || b_wheel==true || b_random==true){
+            rgbLed.turnOff();
+          }
+
+          b_cycle=false ;
+         b_wheel=false;
+         b_random=false;
+            
+            red+=10;
+            rgbLed.writeRGB(red,green,blue);
+            }
+        }
+        if (currentLine.endsWith("GET /g")) {
+          if(green<=255 and green>=0){
+if(b_cycle==true || b_wheel==true || b_random==true){
+            rgbLed.turnOff();
+          }
+
+          b_cycle=false ;
+         b_wheel=false;
+         b_random=false;
+            
+            green+=10;
+            rgbLed.writeRGB(red,green,blue);
+            }
+        }
+        if (currentLine.endsWith("GET /b")) {
+          if(blue<=255 and blue>=0){
+if(b_cycle==true || b_wheel==true || b_random==true){
+            rgbLed.turnOff();
+          }
+
+          b_cycle=false ;
+         b_wheel=false;
+         b_random=false;
+            
+            blue+=10;
+            rgbLed.writeRGB(red,green,blue);
+            }
         }
 
 
