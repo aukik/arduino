@@ -40,7 +40,7 @@ void setup()
     server.begin();
 
 }
-
+int speed=5;
 int value = 0;
 bool cycle=false;
 int wheel_number=0;
@@ -65,33 +65,62 @@ void loop(){
             client.println("HTTP/1.1 200 OK");
             client.println("Content-type:text/html");
             client.println();
-            client.println("<!DOCTYPE html><html>");
-            client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
-            client.println("<link rel=\"icon\" href=\"data:,\">");
-            // CSS to style the on/off buttons
-            // Feel free to change the background-color and font-size attributes to fit your preferences
-            client.println("<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}");
-            client.println(".button { background-color: #4CAF50; border: none; color: white; padding: 16px 40px;");
-            client.println("text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}");
-            client.println(".button2 {background-color: #555555;}</style></head>");
+           client.println("<!DOCTYPE html>");
+client.println("<html>");
 
-            // Web Page Heading
-            client.println("<body><h1>ggezz RGB :3</h1>");
+client.println("<head>");
+client.println("  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'");
+client.println("    integrity='sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3' crossorigin='anonymous'>");
+client.println("  <meta name='viewport' content='width=device-width, initial-scale=1'>");
 
-            // the content of the HTTP response follows the header:
-            client.print(" <a href=\"/Hred\"><button class=\"button\">Red ON</button></a> <br>");
-            client.print(" <a  href=\"/Lred\"><button class=\"button button2\" >Red Off</button></a> <br>");
-            client.print(" <a  href=\"/Hgreen\"><button class=\"button\" >Green On</button></a> <br>");
-            client.print("<a  href=\"/Lgreen\"><button class=\"button button2\" >Green Off</button></a> <br>");
-            client.print(" <a  href=\"/Hblue\"><button class=\"button\" >Blue On</button></a><br> ");
+client.println("</head>");
 
-            client.print(" <a  href=\"/Lblue\"><button class=\"button button2\">Blue Off</button></a><br> ");
-            client.print(" <a  href=\"/cycle\"><button class=\"button\">Cycle RGB</button></a><br> ");
-            client.print(" <a  href=\"/random\"><button class=\"button\">Color Random</button></a><br> ");
-            client.print(" <a  href=\"/wheel\"><button class=\"button\">Color Wheel</button></a><br> ");
-             client.print(" <a  href=\"/off\"><button class=\"button\">Turn Off</button></a><br> ");
-            client.println("</body></html>");
-            // The HTTP response ends with another blank line:
+client.println("<body>");
+client.println("  <nav class='navbar navbar-light' style='background-color: #8ab4d1;'>");
+client.println("    <div class='container-fluid'>");
+client.println("      <a class='navbar-brand' href='#'>GG</a>");
+client.println("    </div>");
+client.println("  </nav>");
+client.println("  <div class='container-fluid' align='center' style='padding-top:5px;'>");
+
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='Hred'><button class='btn btn-danger'>Red ON</button></a> <br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='Lred'><button class='btn btn-dark'>Red Off</button></a> <br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='Hgreen'><button class='btn btn-success'>Green On</button></a> <br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='Lgreen'><button class='btn btn-dark'>Green Off</button></a> <br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='Hblue'><button class='btn btn-primary'>Blue On</button></a><br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='Lblue'><button class='btn btn-dark'>Blue Off</button></a><br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='cycle'><button class='btn btn-secondary'>Cycle RGB</button></a><br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='random'><button class='btn btn-secondary'>Color Random</button></a><br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='wheel'><button class='btn btn-secondary'>Color Wheel</button></a><br>");
+client.println("    </div>");
+client.println("    <div style='padding-bottom: 5px;'>");
+client.println("      <a href='off'><button class='btn btn-dark'>Turn Off</button></a><br>");
+client.println("    </div>");
+client.println("    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'");
+client.println("      integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous'>");
+client.println(" </script>");
+client.println("  </div><div class='container-fluid' align='center' style='padding-top:5px;'><a href='speed_up' style='padding-right:5px;'><button class='btn btn-secondary'>Speed Up</button></a><a href='speed_down'><button class='btn btn-secondary'>Speed Down</button></a></div>");
+client.println("</body>");
+
+client.println("</html>");
+
             client.println();
             // break out of the while loop:
             break;
@@ -152,6 +181,16 @@ void loop(){
          b_wheel=false;
          b_random=false;
         }
+         if (currentLine.endsWith("GET /speed_up")) {
+        if(speed>=6){
+          speed-=5;
+        }
+        }
+         if (currentLine.endsWith("GET /speed_down")) {
+        
+          speed+=5;
+        
+        }
 
 
 
@@ -188,7 +227,7 @@ void loop(){
   }
   if(b_random){
           rgbLed.writeRandom();
-          delay(delayMs);
+          delay(speed*100);
           }
 
   if(b_wheel){
@@ -200,7 +239,7 @@ void loop(){
           rgbLed.writeRGB(i,255,0);
 
 
-          delay(5);
+          delay(speed);
         }
     wheel_number++;
     }else if(wheel_number==1){
@@ -209,7 +248,7 @@ void loop(){
           rgbLed.writeRGB(0,255,i);
 
 
-          delay(5);
+          delay(speed);
         }
         wheel_number++;
     }
@@ -219,7 +258,7 @@ void loop(){
           rgbLed.writeRGB(0,i,255);
 
 
-          delay(5);
+          delay(speed);
         }
         wheel_number++;
     }else if(wheel_number==3){
@@ -228,7 +267,7 @@ void loop(){
           rgbLed.writeRGB(i,0,255);
 
 
-          delay(5);
+          delay(speed);
         }
     wheel_number++;
     }
@@ -239,7 +278,7 @@ void loop(){
           rgbLed.writeRGB(255,0,i);
 
 
-          delay(5);
+          delay(speed);
         }
 wheel_number++;
        }else if(wheel_number==5){
@@ -248,7 +287,7 @@ wheel_number++;
           rgbLed.writeRGB(255,i,0);
 
           wheel_number=0;
-          delay(5);
+          delay(speed);
         }
 
     }
@@ -264,36 +303,36 @@ wheel_number++;
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(0,color_code,0);
           color_code++;
-          delay(5);
+          delay(speed);
         }
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(0,color_code,0);
           color_code--;
-          delay(5);
+          delay(speed);
         }
       light="green";
       } else if(light=="green"){
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(0,0,color_code);
           color_code++;
-          delay(5);
+          delay(speed);
         }
       for(int i=0;i<255;i++){
           rgbLed.writeRGB(0,0,color_code);
           color_code--;
-          delay(5);
+          delay(speed);
         }
       light="blue";
       }else{
         for(int i=0;i<255;i++){
           rgbLed.writeRGB(color_code,0,0);
           color_code++;
-          delay(5);
+          delay(speed);
         }
         for(int i=0;i<255;i++){
           rgbLed.writeRGB(color_code,0,0);
           color_code--;
-          delay(5);
+          delay(speed);
         }
       light="red";
 
